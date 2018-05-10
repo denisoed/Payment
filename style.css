@@ -142,4 +142,5 @@ button {
 .partners {
     display: flex;
     flex-wrap: wrap;
+    padding: 30px 0;
 }
