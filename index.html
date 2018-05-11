@@ -5,7 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Payment</title>
-    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <style>
+        /* Base styles */
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        h2, h4 {
+            margin: 0;
+            padding: 0;
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #e4e7fc;
+            font-size: 22px;
+            opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #e4e7fc;
+            font-size: 22px;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: #e4e7fc;
+            font-size: 22px;
+        }
+        * {
+            outline: none !important;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+        /* Main styles */
+        h4 {
+            color: #ccc;
+            font-size: 14px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: lighter;
+        }
+        h2 {
+            font-family: 'Open Sans', sans-serif;
+        }
+        input {
+            width: 100%;
+            border: none;
+            padding: 8px 0;
+            font-size: 22px;
+            color: #000;
+        }
+        button {
+            width: 100%;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            padding: 15px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: OpenSansRegular, sans-serif;
+        }
+        .transfer {
+            position: relative;
+        }
+        .transfer_amount-tenge {
+            height: 15px;
+            position: absolute;
+            top: 47px;
+            left: 33px;
+        }
+        .transfer_amount {
+            width: 100%;
+        }
+        .arrow_bottom {
+            width: 15px;
+            height: 20px;
+        }
+        .input-group {
+            display: flex;
+            margin: 10px 0;
+        }
+        .payment-wrap {
+            width: 320px;
+            padding: 10px;
+            background-color: #e4e7fc;
+            margin: 0 auto;
+        }
+        .section h2 {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .section_content {
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .section_content .card-number {
+            width: 100%;
+        }
+        .section_content .title_img {
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .validity_cw-cvc {
+            width: 100%;
+            display: flex;
+        }
+        .validity_cw-cvc h4 {
+            color: #e4e7fc;
+            margin-bottom: 10px;
+        }
+        .validity_cw-cvc span {
+            font-size: 22px;
+        }
+        .validity {
+            width: 50%;
+        }
+        .validity input {
+            width: 100%;
+        }
+        .cw-cvc {
+            width: 50%;
+        }
+        .cw-cvc input {
+            width: 100%;
+        }
+        .arrow_bottom {
+            width: 100%;
+            text-align: center;
+        }
+
+        .commission_total {
+            display: flex;
+            padding: 30px 0;
+        }
+        .commission_total .price {
+            font-size: 32px;
+            margin-top: 8px;
+            font-family: OpenSansRegular, sans-serif;
+        }
+        .commission_total h4 {
+            color: #000;
+            font-size: 16px;
+            font-family: OpenSansRegular, sans-serif;
+        }
+        .commission_total .price img {
+            height: 24px;
+        }
+        .commission {
+            width: 50%;
+        }
+        .total {
+            width: 50%;
+        }
+
+        .rates_conditions {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px 0;
+            text-align: left;
+        }
+        .rates_conditions h4 {
+            color: #896484;
+            font-size: 14px;
+        }
+        .rates_conditions img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .rates{
+            width: 40%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .conditions {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .title_img {
+            display: flex;
+            justify-content: space-between;
+        }
+        .title_img img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .partners {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 30px 0;
+            /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1); */
+            /* border-radius: 4px; */
+            /* background-color: #fff; */
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .partners img {
+            height: 30px;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <form action="" method="#" class="payment-wrap">
@@ -18,20 +232,17 @@
                         <h4>Номер карты</h4>
                     </div>
                     <div class="input-group form-from">
-                        <input type="number" maxlength="4" class="first-input" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="text" maxlength="19" class="first-input" id="input-from">
                     </div>
                 </div>
                 <div class="validity_cw-cvc">
                     <div class="validity">
                         <h4>Срок действия</h4>
-                        <input type="text" placeholder="XX/XX" maxlength="4">
+                        <input type="text" id="input-validity" maxlength="5">
                     </div> 
                     <div class="cw-cvc">
                         <h4>CW/CVC</h4>
-                        <input type="password" placeholder="***" maxlength="3">
+                        <input type="password" id="CW-CVC" maxlength="3">
                     </div> 
                 </div>
             </div>
@@ -48,16 +259,14 @@
                         <h4>Номер карты</h4>
                     </div>
                     <div class="input-group form-to">
-                        <input type="number" maxlength="4" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
-                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="text" maxlength="19" id="input-to" class="second-input">
                     </div>
                 </div>
             </div>
-            <div class="section_content">
+            <div class="section_content transfer">
                 <h4>Сумма перевода</h4>
-                <input type="number" placeholder="0" name="amount" class="transfer_amount">
+                <input type="text" name="amount" class="transfer_amount">
+                <!-- <img src="img/Tenge.png" alt="Tenge" class="transfer_amount-tenge"> -->
             </div>
         </div>
 
@@ -107,6 +316,83 @@
         </div>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#input-from').mask('0000 0000 0000 0000', {placeholder: "XXXX XXXX XXXX XXXX"});
+            $('#input-validity').mask('00/00', {placeholder: "XX/XX"});
+            $('#CW-CVC').mask('000', {placeholder: "⚫️⚫️⚫️"});
+            $('#input-to').mask('0000 0000 0000 0000', {placeholder: "XXXX XXXX XXXX XXXX"});
+            $('.transfer_amount').mask('000000000000000000000', {placeholder: "0"});
+            function checkLuhn(value) {
+                var nCheck = 0,
+                    nDigit = 0,
+                    bEven = false;
+                value = value.replace(/\D/g, "");
+
+                for (var n = value.length - 1; n >= 0; n--) {
+                    var cDigit = value.charAt(n),
+                        nDigit = parseInt(cDigit, 10);
+
+                    if (bEven) {
+                        if ((nDigit *= 2) > 9) nDigit -= 9;
+                    }
+
+                    nCheck += nDigit;
+                    bEven = !bEven;
+                }
+
+                return (nCheck % 10) == 0;
+            }
+            // $('#form_one input').keyup(function(e){
+            //     if (e.keyCode == 8) {
+            //         if($(this).val().length == 0){
+            //             $(this).prev().focus();
+            //         }
+            //     }
+            //     if($(this).val().length==$(this).attr("maxlength")){
+            //         $(this).next().focus();
+            //     }
+            // });
+
+            $('#form_one input').keyup(function() {
+                var is_empty = true;
+                for (let i = 0; i < $('#form_one input').length; i++) {
+                    if ($('#form_one input').eq(i).val() == '') {
+                        is_empty = true;
+                    } else {
+                        is_empty = false;
+                    }
+                }
+                if (!is_empty) {
+                    $('.form-to input').eq(0).focus();
+                }
+            });
+
+            $('.first-input').keyup(function() {
+                if ($('.title_img').children().length <= 2) {
+                    if (this.value[0] == 5 && this.value.length <= 1) {
+                        $('.title_img').append('<img src="img/master-card.svg" alt="Card">');
+                    } else if(this.value[0] == 4 && this.value.length <= 1) {
+                        $('.title_img').append('<img src="img/visa.svg" alt="Card">');
+                    }
+                } else if (this.value.length == 0) {
+                    $('.title_img').children('img').remove();
+                }
+            });
+
+            $('.second-input').keyup(function() {
+                if ($('.title_img').children().length <= 2) {
+                    if (this.value[0] == 5 && this.value.length <= 1) {
+                        $('.title_img').append('<img src="img/master-card.svg" alt="Card">');
+                    } else if(this.value[0] == 4 && this.value.length <= 1) {
+                        $('.title_img').append('<img src="img/visa.svg" alt="Card">');
+                    }
+                } else if (this.value.length == 0) {
+                    $('.title_img').children('img').remove();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
