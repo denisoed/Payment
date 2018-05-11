@@ -26,11 +26,29 @@ h2, h4 {
 * {
     outline: none !important;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+/* Fonts */
+@font-face {
+    font-family: OpenSansLight;
+    src: url('fonts/OpenSans-Light.ttf');
+}
+@font-face {
+    font-family: OpenSansRegular;
+    src: url('fonts/OpenSans-Regular.ttf');
+}
 /* Main styles */
 h4 {
     color: #ccc;
     font-size: 14px;
+    font-family: OpenSansLight, sans-serif;
+}
+h2 {
+    font-family: OpenSansRegular, sans-serif;
 }
 input {
     width: 25%;
@@ -47,6 +65,11 @@ button {
     padding: 15px 0;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    font-family: OpenSansRegular, sans-serif;
+}
+.transfer_amount {
+    width: 100%;
 }
 .arrow_bottom {
     width: 15px;
@@ -114,12 +137,17 @@ button {
     padding: 30px 0;
 }
 .commission_total .price {
-    font-size: 24px;
+    font-size: 32px;
     margin-top: 8px;
+    font-family: OpenSansRegular, sans-serif;
 }
 .commission_total h4 {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: OpenSansRegular, sans-serif;
+}
+.commission_total .price img {
+    height: 24px;
 }
 .commission {
     width: 50%;
@@ -136,6 +164,7 @@ button {
 }
 .rates_conditions h4 {
     color: #896484;
+    font-size: 14px;
 }
 .rates_conditions img {
     height: 40px;
@@ -145,11 +174,13 @@ button {
     width: 40%;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 .conditions {
     width: 40%;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .title_img {
@@ -166,9 +197,9 @@ button {
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 30px 0;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-    border-radius: 4px;
-    background-color: #fff;
+    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1); */
+    /* border-radius: 4px; */
+    /* background-color: #fff; */
     padding: 15px;
     margin: 15px 0;
 }

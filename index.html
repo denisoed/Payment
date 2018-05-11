@@ -18,10 +18,10 @@
                         <h4>Номер карты</h4>
                     </div>
                     <div class="input-group form-from">
-                        <input type="text" maxlength="4" class="first-input" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" class="first-input" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
                     </div>
                 </div>
                 <div class="validity_cw-cvc">
@@ -48,16 +48,16 @@
                         <h4>Номер карты</h4>
                     </div>
                     <div class="input-group form-to">
-                        <input type="text" maxlength="4" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
-                        <input type="text" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
+                        <input type="number" maxlength="4" placeholder="XXXX">
                     </div>
                 </div>
             </div>
             <div class="section_content">
                 <h4>Сумма перевода</h4>
-                <input type="text" placeholder="Сумма">
+                <input type="number" placeholder="0" name="amount" class="transfer_amount">
             </div>
         </div>
 
@@ -66,11 +66,17 @@
             <div class="commission_total">
                 <div class="commission">
                     <h4>Комиссия:</h4>
-                    <div class="price">750T</div>
+                    <div class="price">
+                        750
+                        <img src="img/Tenge.png" alt="Tenge">
+                    </div>
                 </div>
                 <div class="total">
                     <h4>Итого:</h4>
-                    <div class="price">75 750T</div>
+                    <div class="price">
+                        75 750
+                        <img src="img/Tenge.png" alt="Tenge">
+                    </div>
                 </div>
             </div>
             <button type="submit">Продолжить</button>
@@ -79,14 +85,14 @@
         <!-- Section 4 -->
         <div class="section">
             <div class="rates_conditions">
-                <div class="rates">
+                <a href="#" class="rates">
                     <img src="img/wallet.png" alt="Rates">
                     <h4>Тарифы и лимиты</h4>
-                </div>
-                <div class="conditions">
+                </a>
+                <a href="#" class="conditions">
                     <img src="img/con.png" alt="Conditions">
                     <h4>Условия перевода</h4>
-                </div>
+                </a>
             </div>
         </div>
 
