@@ -27,8 +27,23 @@ $(document).ready(function(){
                 $(this).prev().focus();
             }
         }
+
         if($(this).val().length==$(this).attr("maxlength")){
             $(this).next().focus();
+        }
+    });
+
+    $('#form_one input').keyup(function() {
+        var is_empty = true;
+        for (let i = 0; i < $('#form_one input').length; i++) {
+            if ($('#form_one input').eq(i).val() == '') {
+                is_empty = true;
+            } else {
+                is_empty = false;
+            }
+        }
+        if (!is_empty) {
+            $('.form-to input').eq(0).focus();
         }
     });
     
