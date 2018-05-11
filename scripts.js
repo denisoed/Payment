@@ -32,4 +32,15 @@ $(document).ready(function(){
         }
     });
     
+    $('.first-input').keyup(function() {
+        if ($('.title_img').children().length <= 2) {
+            if (this.value[0] == 5 && this.value.length <= 1) {
+                $('.title_img').append('<img src="img/master-card.svg" alt="Card">');
+            } else if(this.value[0] == 4 && this.value.length <= 1) {
+                $('.title_img').append('<img src="img/visa.svg" alt="Card">');
+            }
+        } else if (this.value.length == 0) {
+            $('.title_img').children('img').remove();
+        }
+    });
 });
