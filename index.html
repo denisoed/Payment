@@ -86,7 +86,10 @@
             font-size: 14px;
             font-family: 'Open Sans', sans-serif;
         }
-
+        .disable-submit {
+            pointer-events: none;
+            opacity: 0.4;
+        }
         #master-card {
             display: none;
         }
@@ -469,7 +472,11 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" id="submit">Продолжить</button>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="disable-submit" id="submit">Введите номера карт</button>
+            <!-- END SUBMIT -->
+
         </div>
 
         <!-- Section 4 -->
@@ -931,6 +938,35 @@
             $('.transfer_amount').mask('000000000000000000000', {
                 placeholder: "0"
             });
+            
+            (function cheackValidCards() {
+                var fromCard = false;
+                var toCard = false;
+                $('#input-from, #input-to').keyup(function(e) {
+                    if (this.value.length >= 19) {
+                        if (checkLuhn(this.value) == true) {
+                            if ($(this).attr('id') == 'input-from') {
+                                fromCard = true;
+                            } else {
+                                toCard = true;
+                            }
+                        } else {
+                            if ($(this).attr('id') == 'input-from') {
+                                fromCard = false;
+                            } else {
+                                toCard = false;
+                            }
+                        } 
+                    } else {
+                        fromCard, toCard = false;
+                    }
+                    if (fromCard && toCard) {
+                        $('#submit').removeClass('disable-submit').text('Продолжить');
+                    } else {
+                        $('#submit').addClass('disable-submit').text('Введите номера');
+                    }
+                });
+            })();
 
             function checkLuhn(value) {
                 var nCheck = 0,
