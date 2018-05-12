@@ -84,7 +84,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
-            font-family: OpenSansRegular, sans-serif;
+            font-family: 'Open Sans', sans-serif;
         }
 
         #master-card {
@@ -128,7 +128,7 @@
         }
 
         .section h2 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
         }
 
@@ -192,14 +192,15 @@
 
         .commission_total .price {
             font-size: 32px;
+            font-weight: 100;
             margin-top: 8px;
-            font-family: OpenSansRegular, sans-serif;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .commission_total h4 {
             color: #000;
             font-size: 16px;
-            font-family: OpenSansRegular, sans-serif;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .commission_total .price svg {
@@ -223,7 +224,7 @@
 
         .rates_conditions h4 {
             color: #896484;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .rates_conditions svg {
@@ -456,14 +457,14 @@
             <div class="commission_total">
                 <div class="commission">
                     <h4>Комиссия:</h4>
-                    <div class="price">
-                        750
+                    <div class="price" id="commission">
+                        0
                     </div>
                 </div>
                 <div class="total">
                     <h4>Итого:</h4>
-                    <div class="price">
-                        75 750
+                    <div class="price" id="total-price">
+                        0
                     </div>
                 </div>
             </div>
@@ -896,14 +897,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            var commission = 15;
+
+            (function setDefaultDate() {
+                $('#commission').text(commission);
+            })();
+
+            function getTotalPrice(sum, commission) {
+                return commission - sum;
+            }
+
+            (function calculateTotalPrice() {
+                $('.transfer_amount').keyup(function () {
+                    var money = $('.transfer_amount').val();
+                    $('#total-price').text(getTotalPrice(commission, money));
+                });
+            })();
+
             $('#input-from').mask('0000 0000 0000 0000', {
                 placeholder: "XXXX XXXX XXXX XXXX"
             });
-            $('#input-validity').mask('00/00', {
-                placeholder: "XX/XX"
+            $('#input-validity').mask('00 00', {
+                placeholder: "XX XX"
             });
             $('#CW-CVC').mask('000', {
-                placeholder: "⚫️⚫️⚫️"
+                placeholder: "•••"
             });
             $('#input-to').mask('0000 0000 0000 0000', {
                 placeholder: "XXXX XXXX XXXX XXXX"
@@ -932,11 +951,6 @@
 
                 return (nCheck % 10) == 0;
             }
-
-            $('.transfer_amount').keyup(function () {
-                let money = $('.transfer_amount').val();
-                console.log(checkLuhn(money));
-            });
 
             $('#form_one input').keyup(function () {
                 if ($('#form_one input').eq(0).val().length >= 19 &&
