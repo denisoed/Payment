@@ -447,8 +447,7 @@
             </div>
             <div class="section_content transfer">
                 <h4>Сумма перевода</h4>
-                <input type="text" name="amount" class="transfer_amount" maxlength="21">
-                <!-- <img src="img/Tenge.png" alt="Tenge" class="transfer_amount-tenge"> -->
+                <input type="text" name="amount" class="transfer_amount" maxlength="7" autocomplete="off">
             </div>
         </div>
 
@@ -458,13 +457,15 @@
                 <div class="commission">
                     <h4>Комиссия:</h4>
                     <div class="price" id="commission">
-                        0
+                        <span>0</span>
+                        &#8376;
                     </div>
                 </div>
                 <div class="total">
                     <h4>Итого:</h4>
                     <div class="price" id="total-price">
-                        0
+                        <span>0</span>
+                        &#8376;
                     </div>
                 </div>
             </div>
@@ -901,7 +902,7 @@
             var commission = 15;
 
             (function setDefaultDate() {
-                $('#commission').text(commission);
+                $('#commission span').text(commission);
             })();
 
             function getTotalPrice(sum, commission) {
@@ -911,7 +912,7 @@
             (function calculateTotalPrice() {
                 $('.transfer_amount').keyup(function () {
                     var money = $('.transfer_amount').val();
-                    $('#total-price').text(getTotalPrice(commissions, money));
+                    $('#total-price span').text(getTotalPrice(commission, money));
                 });
             })();
 
