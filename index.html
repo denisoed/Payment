@@ -911,7 +911,7 @@
             (function calculateTotalPrice() {
                 $('.transfer_amount').keyup(function () {
                     var money = $('.transfer_amount').val();
-                    $('#total-price').text(getTotalPrice(commission, money));
+                    $('#total-price').text(getTotalPrice(commissions, money));
                 });
             })();
 
