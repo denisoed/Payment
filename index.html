@@ -343,7 +343,34 @@
                         </span>
                     </div>
                     <div class="input-group form-from">
-                        <input type="text" maxlength="19" class="first-input" id="input-from">
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_from-1"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_from-2"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_from-3"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_from-4"
+                        />
                     </div>
                 </div>
                 <div class="validity_cw-cvc">
@@ -380,7 +407,7 @@
         <!-- Section 2 -->
         <div class="section">
             <h2>Зачислить на</h2>
-            <div class="section_content">
+            <div class="section_content" id="form_two">
                 <div class="card-number">
                     <div class="title_img">
                         <h4>Номер карты</h4>
@@ -444,7 +471,34 @@
                         </span>
                     </div>
                     <div class="input-group form-to">
-                        <input type="text" maxlength="19" id="input-to" class="second-input">
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_to-1"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_to-2"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_to-3"
+                        />
+                        <input name="somename"
+                            placeholder="XXXX"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type = "number"
+                            maxlength = "4"
+                            class="inp_to-4"
+                        />
                     </div>
                 </div>
             </div>
@@ -906,61 +960,70 @@
     <script>
         $(document).ready(function () {
 
-            var commission = 15;
+            var coefficient = 0.01;
+            var commission = 0;
+            
+            function getCommission() {
+                var money = $('.transfer_amount').val();
+                commission = money * coefficient;
+                $('#commission span').text(String(commission).slice(0, 5));
+            }
 
             (function setDefaultDate() {
                 $('#commission span').text(commission);
             })();
 
             function getTotalPrice(sum, commission) {
-                return commission - sum;
+                return sum - commission;
             }
 
             (function calculateTotalPrice() {
                 $('.transfer_amount').keyup(function () {
                     var money = $('.transfer_amount').val();
-                    $('#total-price span').text(getTotalPrice(commission, money));
+                    var totalPrice = getTotalPrice(money, commission)
+                    $('#total-price span').text(String(totalPrice).slice(0, 7));
+                    getCommission();
                 });
             })();
 
-            $('#input-from').mask('0000 0000 0000 0000', {
-                placeholder: "XXXX XXXX XXXX XXXX"
-            });
-            $('#input-validity').mask('00 00', {
-                placeholder: "XX XX"
+            $('#input-validity').mask('00/00', {
+                placeholder: "XX/XX"
             });
             $('#CW-CVC').mask('000', {
                 placeholder: "•••"
             });
-            $('#input-to').mask('0000 0000 0000 0000', {
-                placeholder: "XXXX XXXX XXXX XXXX"
-            });
             $('.transfer_amount').mask('000000000000000000000', {
                 placeholder: "0"
             });
-            
+
             (function cheackValidCards() {
-                var fromCard = false;
-                var toCard = false;
-                $('#input-from, #input-to').keyup(function(e) {
-                    if (this.value.length >= 19) {
-                        if (checkLuhn(this.value) == true) {
-                            if ($(this).attr('id') == 'input-from') {
-                                fromCard = true;
-                            } else {
-                                toCard = true;
-                            }
-                        } else {
-                            if ($(this).attr('id') == 'input-from') {
-                                fromCard = false;
-                            } else {
-                                toCard = false;
-                            }
+                var fromCardValid = false;
+                var toCardValid = false;
+
+                $('input').keyup(function(e) {
+                    let cardFrom = $('input').eq(0).val() + $('input').eq(1).val() + $('input').eq(2).val() + $('input').eq(3).val()
+                    let cardTo = $('input').eq(6).val() + $('input').eq(7).val() + $('input').eq(8).val() + $('input').eq(9).val()
+                    if ($('input').eq(0).val().length == 4 &&
+                        $('input').eq(1).val().length == 4 &&
+                        $('input').eq(2).val().length == 4 &&
+                        $('input').eq(3).val().length == 4 &&
+                        $('input').eq(4).val().length == 5 &&
+                        $('input').eq(5).val().length == 3 &&
+                        $('input').eq(6).val().length == 4 &&
+                        $('input').eq(7).val().length == 4 &&
+                        $('input').eq(8).val().length == 4 &&
+                        $('input').eq(9).val().length == 4 &&
+                        $('input').eq(10).val().length > 1) {
+                        if (checkLuhn(cardFrom) == true && checkLuhn(cardTo) == true) {
+                            fromCardValid = true;
+                            toCardValid = true;
                         } 
                     } else {
-                        fromCard, toCard = false;
+                        fromCardValid = false;
+                        toCardValid = false;
                     }
-                    if (fromCard && toCard) {
+                    
+                    if (fromCardValid == true && toCardValid == true) {
                         $('#submit').removeClass('disable-submit').text('Продолжить');
                     } else {
                         $('#submit').addClass('disable-submit').text('Введите номера');
@@ -989,18 +1052,44 @@
                 return (nCheck % 10) == 0;
             }
 
-            $('#form_one input').keyup(function () {
-                if ($('#form_one input').eq(0).val().length >= 19 &&
-                    $('#form_one input').eq(1).val().length >= 5 && 
-                    $('#form_one input').eq(2).val().length >= 3) {
+            $('#form_one input').keyup(function () {                
+                if ($('.inp_from-1').val().length == 4 && 
+                    $('.inp_from-2').val().length == 4 && 
+                    $('.inp_from-3').val().length == 4 && 
+                    $('.inp_from-4').val().length == 4 && 
+                    $('#input-validity').val().length == 5 && 
+                    $('#CW-CVC').val().length == 3) {
                         $('.form-to input').eq(0).focus();
                 }
             });
 
-            $('.first-input, .second-input').keyup(function () {
-                if (this.value[0] == 4) {
+            $('#form_one input').keyup(function(e){
+                if (e.keyCode == 8) {
+                    if($(this).val().length == 0){
+                        $(this).prev().focus();
+                    }
+                }
+
+                if($(this).val().length==$(this).attr("maxlength")){
+                    $(this).next().focus();
+                }
+            });
+
+            $('#form_two input').keyup(function(e){
+                if (e.keyCode == 8) {
+                    if($(this).val().length == 0){
+                        $(this).prev().focus();
+                    }
+                }
+                if($(this).val().length==$(this).attr("maxlength")){
+                    $(this).next().focus();
+                }
+            });
+
+            $('#form_one input, #form_two input').keyup(function () {
+                if ($('#form_one input').val()[0] == 4) {
                     $(this).parent().prev().children('span#visa-card').css('display', 'block');
-                } else if (this.value[0] == 5) {
+                } else if ($('#form_two input').val()[0] == 5) {
                     $(this).parent().prev().children('span#master-card').css('display', 'block');
                 } else {
                     $(this).parent().prev().children('span#master-card').css('display', 'none');
